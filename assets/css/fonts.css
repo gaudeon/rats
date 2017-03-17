@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Chewy";
+  src: url("../fonts/Chewy.ttf");
+}
+
+* {
+    font-family: "Chewy";
+}

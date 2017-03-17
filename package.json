@@ -1,0 +1,17 @@
+{
+  "name": "rats",
+  "version": "1.0.0",
+  "description": "Rats",
+  "main": "main.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaudeon/rats.git"
+  },
+  "author": "Dash Bang Splat (Travis Chase aka gaudeon)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "phaser-ce": "^2.7.3"
+  }
+}
