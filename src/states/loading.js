@@ -15,6 +15,7 @@ App.LoadingState = (function () {
     }
 
     fn.prototype.preload = function () {
+        this.load.json('menuConfig', './assets/json/menu.json');
     };
 
     fn.prototype.create = function () {

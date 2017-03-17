@@ -1,4 +1,4 @@
-var game = new Phaser.Game(800, 600);
+var game = new Phaser.Game(window.outerWidth, window.outerHeight);
 Phaser.Device.whenReady(function () {
     // plugins
     this.game.__plugins = this.game.__plugins || {};
