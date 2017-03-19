@@ -17,18 +17,25 @@ App.Rat = (function () {
         this.anchor.x = 0.5;
         this.anchor.y = 0.5;
 
-        this.speed = 150;
-
-        this.name = "rat";
-
+        this.name             = "rat";
         this.cheese_collected = 0;
+
+        // speed related data
+        this.normal_speed = 150;
+        this.enhanced_speed = 300;
+        this.speed = this.normal_speed;
 
         var rng    = new Phaser.RandomDataGenerator([Date.now()]);
         var color_r = rng.between(0x9f, 0xff);
         var color_g = rng.between(0x9f, 0xff);
         var color_b = rng.between(0x9f, 0xff);
-        var color = (color_r << 16) | (color_g << 8) | color_b;
-        this.tint = color;
+        this.normal_color = (color_r << 16) | (color_g << 8) | color_b;
+        this.tint = this.normal_color;
+
+        // bomb related data
+        this.bombs                   = [];
+        this.bomb_color              = 0x6f0000;
+        this.color_switch_delta_time = 0;
 
         // physics
         this.game.physics.p2.enable(this);
@@ -91,6 +98,24 @@ App.Rat = (function () {
         }
         else {
             this.body.setZeroVelocity();
+        }
+
+        if (this.bombs.length > 0) {
+            if (this.color_switch_delta_time >= 250) {
+                if (this.tint == this.normal_color) {
+                    this.tint = this.bomb_color;
+                }
+                else {
+                    this.tint = this.normal_color;
+                }
+                this.color_switch_delta_time = 0;
+            }
+            else {
+                this.color_switch_delta_time += this.game.time.elapsed;
+            }
+        }
+        else {
+            this.tint = this.normal_color;
         }
     };
 

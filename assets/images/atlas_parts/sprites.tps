@@ -223,6 +223,32 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">cheese_bomb.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>38,30,76,61</rect>
+                <key>scale9Paddings</key>
+                <rect>38,30,76,61</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">cheese_speed.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>38,29,76,57</rect>
+                <key>scale9Paddings</key>
+                <rect>38,29,76,57</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">rat.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -256,6 +282,8 @@
             <filename>arrow.png</filename>
             <filename>rat.png</filename>
             <filename>stopwatch.png</filename>
+            <filename>cheese_speed.png</filename>
+            <filename>cheese_bomb.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

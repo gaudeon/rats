@@ -17,8 +17,24 @@
 	"sourceSize": {"w":136,"h":320}
 },
 {
+	"filename": "cheese_speed",
+	"frame": {"x":0,"y":328,"w":151,"h":114},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":114},
+	"sourceSize": {"w":151,"h":114}
+},
+{
+	"filename": "cheese_bomb",
+	"frame": {"x":321,"y":0,"w":151,"h":121},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":121},
+	"sourceSize": {"w":151,"h":121}
+},
+{
 	"filename": "cheese",
-	"frame": {"x":0,"y":328,"w":151,"h":101},
+	"frame": {"x":159,"y":328,"w":151,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":101},
@@ -26,7 +42,7 @@
 },
 {
 	"filename": "arrow",
-	"frame": {"x":321,"y":0,"w":142,"h":101},
+	"frame": {"x":318,"y":328,"w":142,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":101},
@@ -39,6 +55,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:30f3717ca9e62c41a9a52c77e77da821:56d949f1ad6da0880b485c209ca4aa8a:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:e41d4315d16ea4bd83b0878a23c0c312:da4870b61249c6b536cb6c3284cc275d:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }
