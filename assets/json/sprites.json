@@ -1,0 +1,20 @@
+{"frames": [
+
+{
+	"filename": "rat",
+	"frame": {"x":0,"y":0,"w":136,"h":320},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":136,"h":320},
+	"sourceSize": {"w":136,"h":320}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sprites.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:80759107b66dfbd440d7829d19b59b21:87d61b9ddd4c22d92a2971ec6272393d:1eabdf11f75e3a4fe3147baf7b5be24b$"
+}
+}

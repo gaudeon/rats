@@ -16,6 +16,7 @@ App.LoadingState = (function () {
 
     fn.prototype.preload = function () {
         this.load.json('menuConfig', './assets/json/menu.json');
+        this.game.load.atlas('spriteAtlas', './assets/images/sprites.png', './assets/json/sprites.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
     };
 
     fn.prototype.create = function () {

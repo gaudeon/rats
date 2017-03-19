@@ -6,10 +6,10 @@
                 "boundsAlignV": "middle"
     },
     "label": {
-        "color": "#8f0000"
+        "color": "#00008f"
     },
     "link": {
-        "color": "#ff0000"
+        "color": "#0000ff"
     },
     "items": [
         {
