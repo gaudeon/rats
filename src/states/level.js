@@ -74,8 +74,7 @@ App.LevelState = (function () {
                 used: 0
             },
             bomb: {
-                //allowed: Math.ceil((this.num_cheese - 6) / 3),
-                allowed: this.num_cheese / 2,
+                allowed: Math.ceil((this.num_cheese - 6) / 3),
                 used: 0
             }
         };
