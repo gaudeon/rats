@@ -23,6 +23,13 @@ App.Rat = (function () {
 
         this.cheese_collected = 0;
 
+        var rng    = new Phaser.RandomDataGenerator([Date.now()]);
+        var color_r = rng.between(0x9f, 0xff);
+        var color_g = rng.between(0x9f, 0xff);
+        var color_b = rng.between(0x9f, 0xff);
+        var color = (color_r << 16) | (color_g << 8) | color_b;
+        this.tint = color;
+
         // physics
         this.game.physics.p2.enable(this);
         this.body.angularDamping = 1;

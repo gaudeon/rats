@@ -4,11 +4,13 @@ var App = App || {};
 App.CountDown = (function () {
     "use strict";
 
-    var fn = function (game, x, y, state, debug) {
+    var fn = function (game, x, y, color, state, debug) {
+        this.color = color || "#ff6666";
+
         Phaser.Text.call(this, game, x, y, "", {
             "font": "32px Chewy",
             "fontSize": 32,
-            "fill": "#ff6666"
+            "fill": this.color
         });
 
         this.state = state;
@@ -21,7 +23,7 @@ App.CountDown = (function () {
     fn.prototype.update = function () {
         var minutes = Math.floor(this.state.time_remaining / 60);
         var seconds = this.state.time_remaining - minutes * 60;
-        this.text = "Time Left: " + minutes + ":" + ((seconds < 10) ? "0" + seconds : seconds);
+        this.text = minutes + ":" + ((seconds < 10) ? "0" + seconds : seconds);
     };
 
     return fn;

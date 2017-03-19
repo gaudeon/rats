@@ -243,7 +243,10 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="g5005">
+       id="g5005"
+       inkscape:export-filename="E:\cygwin64\home\travi\rats\assets\images\atlas_parts\cheese.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <path
          d="m 111.8879,201.72292 24.46853,11.6392 18.04918,-15.89694 -21.87885,-6.93823 z"
          style="fill:#afafde;fill-opacity:0.99607843;fill-rule:evenodd;stroke:none;stroke-width:0.37795275;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"

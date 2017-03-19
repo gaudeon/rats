@@ -13,7 +13,7 @@ App.MenuState = (function () {
 
     fn.prototype.init = function () {
         this.config = this.game.cache.getJSON('menuConfig');
-    }
+    };
 
     fn.prototype.preload = function () {
     };
@@ -21,7 +21,7 @@ App.MenuState = (function () {
     fn.prototype.create = function () {
         // set world bounds because playing missions will change it
         this.game.world.setBounds(0,0,800,600);
-        this.game.stage.backgroundColor = "#6f6f6f";
+        this.game.stage.backgroundColor = "#3f3f3f";
 
         var y = 0;
         this.config.items.forEach((function (item) {
@@ -44,10 +44,16 @@ App.MenuState = (function () {
 
             y += this.config.style.fontSize + 10;
         }).bind(this));
+
+        this.controls = this.game.input.keyboard.createCursorKeys();
+        this.controls.enter = this.game.input.keyboard.addKey(Phaser.KeyCode.ENTER);
     };
 
 
      fn.prototype.update = function () {
+         if (this.controls.enter.isDown) {
+             this.state.start("Level", true, false);
+         }
      };
 
      return fn;

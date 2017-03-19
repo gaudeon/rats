@@ -1,20 +1,36 @@
 {"frames": [
 
 {
+	"filename": "stopwatch",
+	"frame": {"x":144,"y":0,"w":169,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":169,"h":200},
+	"sourceSize": {"w":169,"h":200}
+},
+{
+	"filename": "rat",
+	"frame": {"x":0,"y":0,"w":136,"h":320},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":136,"h":320},
+	"sourceSize": {"w":136,"h":320}
+},
+{
 	"filename": "cheese",
-	"frame": {"x":0,"y":0,"w":151,"h":101},
+	"frame": {"x":0,"y":328,"w":151,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":101},
 	"sourceSize": {"w":151,"h":101}
 },
 {
-	"filename": "rat",
-	"frame": {"x":159,"y":0,"w":136,"h":320},
+	"filename": "arrow",
+	"frame": {"x":321,"y":0,"w":142,"h":101},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":136,"h":320},
-	"sourceSize": {"w":136,"h":320}
+	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":101},
+	"sourceSize": {"w":142,"h":101}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
@@ -23,6 +39,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6232d242e3c1d15c9455ce00c94cc2d4:efcdd1f90efa6bc54ff78a73874af5ce:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:30f3717ca9e62c41a9a52c77e77da821:56d949f1ad6da0880b485c209ca4aa8a:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }

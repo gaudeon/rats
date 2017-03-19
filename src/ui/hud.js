@@ -16,7 +16,7 @@ App.Hud = (function () {
 
         this.bar_graphic = new Phaser.Graphics(this.game);
         this.bar_graphic.beginFill(this.bar_color);
-        this.bar_graphic.drawRect(0, 0, this.game.width, this.game.height);
+        this.bar_graphic.drawRect(0, 0, this.game.width, this.bar_height);
         this.bar_graphic.endFill();
         this.bar_texture = this.bar_graphic.generateTexture();
 
@@ -28,7 +28,11 @@ App.Hud = (function () {
 
         this.cheese_counter = this.add(new App.CheeseCounter(this.game, 72, this.game.height - this.bar_height + 8, this.state, this.debug));
 
-        this.countdown = this.add(new App.CountDown(this.game, this.game.width - 220, this.game.height - this.bar_height + 8, this.state, this.debug));
+        this.watch_icon = this.create(this.game.width - 120, this.game.height - this.bar_height + 16, "spriteAtlas", "stopwatch");
+        this.watch_icon.width = 24;
+        this.watch_icon.height = 24;
+
+        this.countdown = this.add(new App.CountDown(this.game, this.game.width - 70, this.game.height - this.bar_height + 8, "#ff6666", this.state, this.debug));
     };
 
     fn.prototype = Object.create(Phaser.Group.prototype);
