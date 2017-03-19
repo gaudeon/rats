@@ -35,7 +35,7 @@ App.MenuState = (function () {
                 text.inputEnabled = true;
 
                 text.events.onInputUp.add(function (ev) {
-                    this.state.start(state);
+                    this.state.start(state, true, false);
                 }, this);
             }
             else {

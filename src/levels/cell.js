@@ -5,10 +5,11 @@ App.Cell = (function () {
     "use strict";
 
     var fn = function (game, x, y, id) {
-        this.game = game;
-        this.x    = x;
-        this.y    = y;
-        this.id   = id || Math.random();
+        this.game   = game;
+        this.x      = x;
+        this.y      = y;
+        this.id     = id || Math.random();
+        this.object = undefined;
 
         this.walls = {
             north: true,
@@ -71,6 +72,10 @@ App.Cell = (function () {
     fn.prototype.getSouth = function () { return this.walls.south; };
     fn.prototype.getEast  = function () { return this.walls.east; };
     fn.prototype.getWest  = function () { return this.walls.west; };
+
+    fn.prototype.setObject = function (object) { this.object = object; };
+    fn.prototype.getObject = function () { return this.object; };
+    fn.prototype.hasObject = function () { return "undefined" !== typeof this.object; };
 
     return fn;
 })();

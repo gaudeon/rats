@@ -1,8 +1,16 @@
 {"frames": [
 
 {
+	"filename": "cheese",
+	"frame": {"x":0,"y":0,"w":151,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":101},
+	"sourceSize": {"w":151,"h":101}
+},
+{
 	"filename": "rat",
-	"frame": {"x":0,"y":0,"w":136,"h":320},
+	"frame": {"x":159,"y":0,"w":136,"h":320},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":136,"h":320},
@@ -15,6 +23,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:80759107b66dfbd440d7829d19b59b21:87d61b9ddd4c22d92a2971ec6272393d:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:6232d242e3c1d15c9455ce00c94cc2d4:efcdd1f90efa6bc54ff78a73874af5ce:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }

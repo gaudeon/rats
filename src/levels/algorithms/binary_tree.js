@@ -4,8 +4,8 @@ var App = App || {};
 App.BinaryTreeAlgorithm = (function () {
     "use strict";
 
-    var fn = function (game, width, height, grid) {
-        App.Algorithm.call(this, game, width, height, grid);
+    var fn = function (game, width, height, grid, seed) {
+        App.Algorithm.call(this, game, width, height, grid, seed);
     };
 
     fn.prototype = Object.create(App.Algorithm.prototype);

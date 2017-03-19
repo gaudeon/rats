@@ -17,9 +17,11 @@ App.Rat = (function () {
         this.anchor.x = 0.5;
         this.anchor.y = 0.5;
 
-        this.reset(x,y);
-
         this.speed = 150;
+
+        this.name = "rat";
+
+        this.cheese_collected = 0;
 
         // physics
         this.game.physics.p2.enable(this);
@@ -28,14 +30,19 @@ App.Rat = (function () {
 
         // helps reduce breaking through walls
         this.body.onBeginContact.add((function (body) {
-            if (body && body.sprite.name.match(/wall/)) {
-                this.body.setZeroVelocity();
+            if (body) {
+                if (body.sprite.name.match(/wall/)) {
+                    this.body.setZeroVelocity();
+                }
+                else if (body.sprite.name == "cheese") {
+                    body.sprite.kill();
+                }
             }
         }).bind(this));
 
         // helps reduce breaking through walls
         this.body.onEndContact.add((function (body) {
-            if (body && body.sprite.name.match(/wall/)) {
+            if (body && body.sprite && body.sprite.name && body.sprite.name.match(/wall/)) {
                 this.body.setZeroVelocity();
             }
         }).bind(this));

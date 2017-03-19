@@ -4,7 +4,7 @@ var App = App || {};
 App.Maze = (function () {
     "use strict";
 
-    var fn = function (game, grid_x, grid_y, grid_width, grid_height, algorithm, debug) {
+    var fn = function (game, grid_x, grid_y, grid_width, grid_height, algorithm, seed, debug) {
         Phaser.SpriteBatch.call(this, game);
 
         this.grid_width      = grid_width || 10;
@@ -15,6 +15,7 @@ App.Maze = (function () {
         this.cell_size       = 100;
         this.grid            = new App.Grid(game, this.grid_width, this.grid_height);
         this.debug           = debug || false;
+        this.seed            = seed  || Date.now();
         this.algorithm       = algorithm || "Solid";
         this.algorithm_class = eval("App." + this.algorithm + "Algorithm");
         if ("undefined" === typeof this.algorithm_class) {
@@ -38,12 +39,14 @@ App.Maze = (function () {
         this.v_wall_texture = this.v_wall_graphic.generateTexture();
 
         // setup and run the algorithm to generate our maze
-        this.algorithm = new this.algorithm_class(game, grid_width, grid_height, this.grid);
-        this.algorithm.run();
+        this.algorithm_obj = new this.algorithm_class(game, grid_width, grid_height, this.grid, this.seed);
+        this.algorithm_obj.run();
 
         // enable physics for walls
         this.enableBody      = true;
         this.physicsBodyType = Phaser.Physics.P2JS;
+
+        this.draw();
     };
 
     fn.prototype = Object.create(Phaser.SpriteBatch.prototype);
@@ -67,6 +70,18 @@ App.Maze = (function () {
 
     fn.prototype.cellCenterX = function (cell_col) { return this.cellTopLeftX(cell_col) + this.cell_size / 2; };
     fn.prototype.cellCenterY = function (cell_row) { return this.cellTopLeftY(cell_row) + this.cell_size / 2; };
+
+    fn.prototype.cellSetObject = function (col, row, object) { this.grid.getCell(col, row).setObject(object); };
+    fn.prototype.cellGetObject = function (col, row) { this.grid.getCell(col, row).getObject(); };
+    fn.prototype.cellHasObject = function (col, row) { this.grid.getCell(col, row).hasObject(); };
+    fn.prototype.adjacentCellHasObject = function (col, row) {
+        var cell = this.grid.getCell(col, row);
+
+        return (cell.cellUp() && cell.cellUp().hasObject())
+            || (cell.cellRight() && cell.cellRight().hasObject())
+            || (cell.cellDown() && cell.cellDown().hasObject())
+            || (cell.cellLeft() && cell.cellLeft().hasObject());
+    };
 
     fn.prototype.draw = function () {
         for (var x = 0; x < this.grid_width; x++) {

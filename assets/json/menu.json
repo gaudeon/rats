@@ -6,10 +6,10 @@
                 "boundsAlignV": "middle"
     },
     "label": {
-        "color": "#00008f"
+        "color": "#ffffff"
     },
     "link": {
-        "color": "#0000ff"
+        "color": "#ff6666"
     },
     "items": [
         {
@@ -17,7 +17,7 @@
             "state": false
         },
         {
-            "label": "Play",
+            "label": "Start Game",
             "state": "Level"
         }
     ]
