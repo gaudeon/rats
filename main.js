@@ -9,11 +9,9 @@ let win;
 function createWindow () {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 820,
-        height: 600,
+        width: 835,
+        height: 660,
         center: true,
-        useContentSize: true,
-        resizable: false,
         title: "Rats!",
         backgroundColor: "#000000",
         webPreferences: {
