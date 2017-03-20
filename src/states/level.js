@@ -102,8 +102,15 @@ App.LevelState = (function () {
                 specials.bomb.used++;
             }
 
+            // cheese sound
+            this.cheese_sound = this.game.add.audio("cheeseSound", 1, false);
+            this.bomb_sound = this.game.add.audio("bombSound", 1, false);
+
             var cheese = new App.Cheese(this.game, this.maze.cellCenterX(cheese_cell_col), this.maze.cellCenterY(cheese_cell_row), cheese_type, this.debug);
             cheese.events.onKilled.add(function (cheese) {
+                // play sound
+                this.cheese_sound.play();
+
                 // rat got a cheese
                 this.rat.cheese_collected++;
 
@@ -184,6 +191,9 @@ App.LevelState = (function () {
     fn.prototype.startCheeseBomb = function () {
         var bomb_timer = this.game.time.create(true);
         bomb_timer.add(10 * 1000, function () {
+            // play sound
+            this.bomb_sound.play();
+
             this.levelFailed();
         }, this);
         bomb_timer.start();
