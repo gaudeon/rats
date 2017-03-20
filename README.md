@@ -1,4 +1,4 @@
-#Rats!
+# Rats!
 
 This was created as an entry for a linux game jam hosted in itch (https://dashbangsplat.itch.io/rats)
 
@@ -8,7 +8,7 @@ Ever want to be a rat in a maze searching for cheese? Well this is your lucky da
 ## Pre-requisites
 1. Electron - httpd://electron.atom.io - used to for development and pacaking
 2. Node - http://nodejs.org - for build tools and getting latest versus of third party scripts
-3. Install all the dev deps in the rats dir for things like gulp and phaser-ce `npm install`
+3. Install all the dev deps in the rats dir for things like gulp and phaser-ce (i.e. `npm install`)
 
 Starting (from the rats directory)
 ```
