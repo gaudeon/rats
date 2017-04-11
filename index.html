@@ -9,10 +9,12 @@
         <!-- Vendor Files -->
         <script src="./vendor/phaser.js" type="text/javascript"></script>
         <script>
-            var wf = require('./vendor/webfont');
+            "use strict";
+
+            let wf = require('./vendor/webfont');
 
             wf.load({
-                active: function () {
+                active: () => {
                     window.webfonts_are_loaded = true;
                 },
                 custom: {
@@ -31,10 +33,10 @@
        <script src="./src/levels/algorithms/solid.js" type="text/javascript"></script>
        <script src="./src/objects/cheese.js" type="text/javascript"></script>
        <script src="./src/objects/rat.js" type="text/javascript"></script>
-       <script src="./src/states/level.js" type="text/javascript"></script>
-       <script src="./src/states/loading.js" type="text/javascript"></script>
-       <script src="./src/states/menu.js" type="text/javascript"></script>
-       <script src="./src/states/results.js" type="text/javascript"></script>
+       <script src="./src/states/levelState.js" type="text/javascript"></script>
+       <script src="./src/states/loadingState.js" type="text/javascript"></script>
+       <script src="./src/states/menuState.js" type="text/javascript"></script>
+       <script src="./src/states/resultsState.js" type="text/javascript"></script>
        <script src="./src/ui/hud.js" type="text/javascript"></script>
        <script src="./src/ui/cheese_counter.js" type="text/javascript"></script>
        <script src="./src/ui/countdown.js" type="text/javascript"></script>

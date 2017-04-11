@@ -15,7 +15,7 @@ function createWindow () {
         title: "Rats!",
         backgroundColor: "#000000",
         webPreferences: {
-            devTools: false
+            devTools: true
         }
     });
 

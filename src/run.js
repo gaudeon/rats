@@ -1,19 +1,25 @@
-var game = new Phaser.Game(800,600);
-Phaser.Device.whenReady(function () {
+"use strict";
+
+const GAME_WIDTH  = 800;
+const GAME_HEIGHT = 600;
+
+let game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT);
+
+game.device.whenReady(function () {
     // plugins
-    this.game.__plugins = this.game.__plugins || {};
+    this.__plugins = this.__plugins || {};
 
     // add plugins here
     // ...
 
     // setup global namespace under game for our global data
-    game.global = {};
+    this.global = {};
 
     // states
-    game.state.add('Loading', App.LoadingState);
-    game.state.add('Menu', App.MenuState);
-    game.state.add('Level', App.LevelState);
-    game.state.add('Results', App.ResultsState);
+    this.state.add('Loading', LoadingState);
+    this.state.add('Menu', MenuState);
+    this.state.add('Level', LevelState);
+    this.state.add('Results', ResultsState);
 
-    game.state.start('Loading');
-});
+    this.state.start('Loading');
+}, game);

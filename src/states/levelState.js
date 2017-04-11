@@ -1,17 +1,11 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.LevelState = (function () {
-    "use strict";
+class LevelState extends Phaser.State {
+    constructor (game) {
+        super(game);
+    }
 
-    var fn = function (game) {
-        Phaser.State.call(this, game);
-    };
-
-    fn.prototype = Object.create(Phaser.State.prototype);
-    fn.prototype.constructor = fn;
-
-    fn.prototype.init = function (level_number, base_maze_size, base_num_cheese, statistics) {
+    init (level_number, base_maze_size, base_num_cheese, statistics) {
         // game stats
         this.statistics            = statistics || {};
         this.statistics.level_seed = this.statistics.level_seed || Date.now();
@@ -32,12 +26,9 @@ App.LevelState = (function () {
         //speed cheese
         this.cheese_speed_time_remaining = 0;
         this.cheese_speed_enabled = false;
-    };
+    }
 
-    fn.prototype.preload = function () {
-    };
-
-    fn.prototype.create = function () {
+    create () {
         this.game.physics.startSystem(Phaser.Physics.P2JS);
 
         // desired fps
@@ -49,26 +40,26 @@ App.LevelState = (function () {
         this.maze = new App.Maze(this.game, this.padding, this.padding, this.maze_size, this.maze_size, "BinaryTree", this.level_seed, this.debug);
 
         // calculate x axis bounds
-        var bounds_x = this.maze.pixelWidth() + this.padding;
+        let bounds_x = this.maze.pixelWidth() + this.padding;
         bounds_x = bounds_x < this.game.width ? this.game.width : bounds_x;
 
         // calculate y axis bounds
-        var bounds_y = this.maze.pixelHeight() + this.padding;
+        let bounds_y = this.maze.pixelHeight() + this.padding;
         bounds_y = bounds_y < this.game.height ? this.game.height : bounds_y;
 
         // reset world bounds
         this.game.world.setBounds(0, 0, bounds_x, bounds_y);
 
         // add the rat
-        var rat_cell_col = this.rng.between(0, this.maze_size - 1);
-        var rat_cell_row = this.rng.between(0, this.maze_size - 1);
+        let rat_cell_col = this.rng.between(0, this.maze_size - 1);
+        let rat_cell_row = this.rng.between(0, this.maze_size - 1);
         this.rat = new App.Rat(this.game, this.maze.cellCenterX(rat_cell_col), this.maze.cellCenterY(rat_cell_row), this.debug);
         this.game.add.existing(this.rat);
         this.maze.cellSetObject(rat_cell_col, rat_cell_row, this.rat);
 
         // create the cheese
         this.cheese = [];
-        var specials = {
+        let specials = {
             speed: {
                 allowed: Math.ceil((this.num_cheese - 5) / 2),
                 used: 0
@@ -78,11 +69,11 @@ App.LevelState = (function () {
                 used: 0
             }
         };
-        for (var c = 0; c < this.num_cheese; c++) {
-            var cheese_cell_col = this.rng.between(0, this.maze_size - 1);
-            var cheese_cell_row = this.rng.between(0, this.maze_size - 1);
+        for (let c = 0; c < this.num_cheese; c++) {
+            let cheese_cell_col = this.rng.between(0, this.maze_size - 1);
+            let cheese_cell_row = this.rng.between(0, this.maze_size - 1);
 
-            var timeout = 0;
+            let timeout = 0;
             while ((this.maze.cellHasObject(cheese_cell_col, cheese_cell_row)
                 || this.maze.adjacentCellHasObject(cheese_cell_col, cheese_cell_row))
                 && ++timeout <= this.maze_size) {
@@ -91,7 +82,7 @@ App.LevelState = (function () {
                 cheese_cell_row = this.rng.between(0, this.maze_size - 1);
             }
 
-            var cheese_type = undefined;
+            let cheese_type = undefined;
             if (specials.speed.used < specials.speed.allowed) {
                 cheese_type = 'speed';
                 specials.speed.used++;
@@ -106,8 +97,8 @@ App.LevelState = (function () {
             this.cheese_sound = this.game.add.audio("cheeseSound", 1, false);
             this.bomb_sound = this.game.add.audio("bombSound", 1, false);
 
-            var cheese = new App.Cheese(this.game, this.maze.cellCenterX(cheese_cell_col), this.maze.cellCenterY(cheese_cell_row), cheese_type, this.debug);
-            cheese.events.onKilled.add(function (cheese) {
+            let cheese = new App.Cheese(this.game, this.maze.cellCenterX(cheese_cell_col), this.maze.cellCenterY(cheese_cell_row), cheese_type, this.debug);
+            cheese.events.onKilled.add((cheese) => {
                 // play sound
                 this.cheese_sound.play();
 
@@ -116,7 +107,7 @@ App.LevelState = (function () {
 
                 // apply cheese's effect
                 cheese.applyEffect(this);
-            }, this);
+            });
             this.game.add.existing(cheese);
             this.maze.cellSetObject(cheese_cell_col, cheese_cell_row, cheese);
             this.cheese.push(cheese);
@@ -127,28 +118,28 @@ App.LevelState = (function () {
 
         // start the timers
         this.startTimers();
-    };
+    }
 
-    fn.prototype.update = function () {
+    update () {
         if (this.rat.cheese_collected >= this.num_cheese) {
             this.levelSuccess();
         }
-    };
+    }
 
-    fn.prototype.recordStatistics = function (completed) {
+    recordStatistics (completed) {
         this.statistics.levels[this.level_number] = {
             completed: false,
             num_cheese: this.num_cheese,
             cheese_collected: this.rat.cheese_collected,
             time_elapsed: this.time_elapsed
         };
-    };
+    }
 
-    fn.prototype.startTimers = function () {
+    startTimers () {
         // create and start the timer
         this.game_over_timer = this.game.time.create(false);
 
-        this.game_over_timer.loop(1000, function () {
+        this.game_over_timer.loop(1000, () => {
             // update times
             this.time_remaining--;
             this.time_elapsed++;
@@ -158,14 +149,14 @@ App.LevelState = (function () {
                 // time's up
                 this.levelFailed();
             }
-        }, this);
+        });
 
         this.game_over_timer.start();
 
         // create and start the speed timer
         this.cheese_speed_timer = this.game.time.create(false);
 
-        this.cheese_speed_timer.loop(1000, function () {
+        this.cheese_speed_timer.loop(1000, () => {
             if (this.cheese_speed_enabled) {
                 if (--this.cheese_speed_time_remaining <= 0) {
                     this.rat.speed = this.rat.normal_speed;
@@ -173,59 +164,57 @@ App.LevelState = (function () {
                     this.cheese_speed_time_remaining = 0;
                 }
             }
-        }, this);
+        });
 
         this.cheese_speed_timer.start();
-    };
+    }
 
-    fn.prototype.cleanupTimers = function () {
-        this.rat.bombs.forEach(function (bomb_timer) {
+    cleanupTimers () {
+        this.rat.bombs.forEach((bomb_timer) => {
             bomb_timer.destroy();
         });
 
         this.game_over_timer.destroy();
 
         this.cheese_speed_timer.destroy();
-    };
+    }
 
-    fn.prototype.startCheeseBomb = function () {
-        var bomb_timer = this.game.time.create(true);
-        bomb_timer.add(10 * 1000, function () {
+    startCheeseBomb () {
+        let bomb_timer = this.game.time.create(true);
+        bomb_timer.add(10 * 1000, () => {
             // play sound
             this.bomb_sound.play();
 
             this.levelFailed();
-        }, this);
+        });
         bomb_timer.start();
 
         this.rat.bombs.push(bomb_timer);
-    };
+    }
 
-    fn.prototype.cleanupOneCheeseBomb = function () {
+    cleanupOneCheeseBomb () {
         if (this.rat.bombs.length > 0) {
-            var bombs_removed = this.rat.bombs.splice(0, 1);
+            let bombs_removed = this.rat.bombs.splice(0, 1);
 
-            bombs_removed.forEach(function (bomb_timer) {
+            bombs_removed.forEach((bomb_timer) => {
                 bomb_timer.destroy();
             });
         }
-    };
+    }
 
-    fn.prototype.levelFailed = function () {
+    levelFailed () {
         this.cleanupTimers();
 
         this.recordStatistics(false);
 
         this.state.start('Results', true, false, this.statistics);
-    };
+    }
 
-    fn.prototype.levelSuccess = function () {
+    levelSuccess () {
         this.cleanupTimers();
 
         this.recordStatistics(true);
 
         this.state.start('Level', true, false, this.level_number + 1, this.maze_size, this.num_cheese, this.statistics);
-    };
-
-    return fn;
-})();
+    }
+}
