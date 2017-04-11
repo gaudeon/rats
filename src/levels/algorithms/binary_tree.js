@@ -11,20 +11,20 @@ class BinaryTreeAlgorithm extends Algorithm {
                 var cell = this.grid.getCell(x,y);
 
                 if (x < this.width - 1 && y < this.height - 1) {
-                    if (cell.getEast() && cell.getSouth()) {
+                    if (cell.wallEast && cell.wallSouth) {
                         if (this.rng.integer() % 2 == 0) {
-                            cell.setEast(false);
+                            cell.wallEast = false;
                         }
                         else {
-                            cell.setSouth(false);
+                            cell.wallSouth = false;
                         }
                     }
                 }
                 else if (x == this.width - 1 && y < this.height - 1) {
-                    cell.setSouth(false);
+                    cell.wallSouth = false;
                 }
                 else if (x < this.width - 1 && y == this.height - 1) {
-                    cell.setEast(false);
+                    cell.wallEast = false;
                 }
             }
         }

@@ -2,11 +2,11 @@
 
 class Cell {
     constructor (game, x, y, id = Math.random()) {
-        this.game   = game;
-        this.x      = x;
-        this.y      = y;
-        this.id     = id;
-        this.object = undefined;
+        this.game  = game;
+        this.x     = x;
+        this.y     = y;
+        this.id    = id;
+        this._item = undefined;
 
         this.walls = {
             north: true,
@@ -23,17 +23,17 @@ class Cell {
         };
     }
 
-    setCellRight (cell) { this.adjacent_cells.right = cell; }
-    setCellLeft  (cell) { this.adjacent_cells.left = cell; }
-    setCellDown  (cell) { this.adjacent_cells.down = cell; }
-    setCellUp    (cell) { this.adjacent_cells.up = cell; }
+    set cellRight (cell) { this.adjacent_cells.right = cell; }
+    set cellLeft  (cell) { this.adjacent_cells.left = cell; }
+    set cellDown  (cell) { this.adjacent_cells.down = cell; }
+    set cellUp    (cell) { this.adjacent_cells.up = cell; }
 
-    cellRight () { return this.adjacent_cells.right; }
-    cellLeft  () { return this.adjacent_cells.left; }
-    cellDown  () { return this.adjacent_cells.down; }
-    cellUp    () { return this.adjacent_cells.up; }
+    get cellRight () { return this.adjacent_cells.right; }
+    get cellLeft  () { return this.adjacent_cells.left; }
+    get cellDown  () { return this.adjacent_cells.down; }
+    get cellUp    () { return this.adjacent_cells.up; }
 
-    setNorth (bool) {
+    set wallNorth (bool) {
         this.walls.north = bool;
 
         if (this.adjacent_cells.up) {
@@ -41,7 +41,7 @@ class Cell {
         }
     }
 
-    setSouth (bool) {
+    set wallSouth (bool) {
         this.walls.south = bool;
 
         if (this.adjacent_cells.down) {
@@ -49,7 +49,7 @@ class Cell {
         }
     }
 
-    setEast (bool) {
+    set wallEast (bool) {
         this.walls.east = bool;
 
         if (this.adjacent_cells.right) {
@@ -57,7 +57,7 @@ class Cell {
         }
     }
 
-    setWest (bool) {
+    set wallWest (bool) {
         this.walls.west = bool;
 
         if (this.adjacent_cells.left) {
@@ -65,12 +65,12 @@ class Cell {
         }
     }
 
-    getNorth () { return this.walls.north; }
-    getSouth () { return this.walls.south; }
-    getEast  () { return this.walls.east; }
-    getWest  () { return this.walls.west; }
+    get wallNorth () { return this.walls.north; }
+    get wallSouth () { return this.walls.south; }
+    get wallEast  () { return this.walls.east; }
+    get wallWest  () { return this.walls.west; }
 
-    setObject (object) { this.object = object; }
-    getObject () { return this.object; }
-    hasObject () { return "undefined" !== typeof this.object; }
+    set item    (object) { this._item = object; }
+    get item    () { return this._item; }
+    get hasItem () { return "undefined" !== typeof this._item; }
 }

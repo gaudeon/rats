@@ -55,7 +55,7 @@ class LevelState extends Phaser.State {
         let rat_cell_row = this.rng.between(0, this.maze_size - 1);
         this.rat = new Rat(this.game, this.maze.cellCenterX(rat_cell_col), this.maze.cellCenterY(rat_cell_row), this.debug);
         this.game.add.existing(this.rat);
-        this.maze.cellSetObject(rat_cell_col, rat_cell_row, this.rat);
+        this.maze.cellSetItem(rat_cell_col, rat_cell_row, this.rat);
 
         // create the cheese
         this.cheese = [];
@@ -74,8 +74,8 @@ class LevelState extends Phaser.State {
             let cheese_cell_row = this.rng.between(0, this.maze_size - 1);
 
             let timeout = 0;
-            while ((this.maze.cellHasObject(cheese_cell_col, cheese_cell_row)
-                || this.maze.adjacentCellHasObject(cheese_cell_col, cheese_cell_row))
+            while ((this.maze.cellHasItem(cheese_cell_col, cheese_cell_row)
+                || this.maze.adjacentCellHasItem(cheese_cell_col, cheese_cell_row))
                 && ++timeout <= this.maze_size) {
 
                 cheese_cell_col = this.rng.between(0, this.maze_size - 1);
@@ -109,7 +109,7 @@ class LevelState extends Phaser.State {
                 cheese.applyEffect(this);
             });
             this.game.add.existing(cheese);
-            this.maze.cellSetObject(cheese_cell_col, cheese_cell_row, cheese);
+            this.maze.cellSetItem(cheese_cell_col, cheese_cell_row, cheese);
             this.cheese.push(cheese);
         }
 

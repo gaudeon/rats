@@ -22,19 +22,19 @@ class Grid {
                 cell = this.getCell(x, y);
 
             if (x < this.width - 1) {
-                cell.setCellRight( this.getCell(x + 1, y) );
+                cell.cellRight = this.getCell(x + 1, y);
             }
 
             if (x > 0) {
-                cell.setCellLeft( this.getCell(x - 1, y) );
+                cell.cellLeft = this.getCell(x - 1, y);
             }
 
             if (y < this.height - 1) {
-                cell.setCellDown( this.getCell(x, y + 1) );
+                cell.cellDown = this.getCell(x, y + 1);
             }
 
             if (y > 0) {
-                cell.setCellUp( this.getCell(x, y - 1) );
+                cell.cellUp = this.getCell(x, y - 1);
             }
         }
     }

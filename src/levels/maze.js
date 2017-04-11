@@ -65,16 +65,16 @@ class Maze extends Phaser.SpriteBatch {
     cellCenterX (cell_col) { return this.cellTopLeftX(cell_col) + this.cell_size / 2; }
     cellCenterY (cell_row) { return this.cellTopLeftY(cell_row) + this.cell_size / 2; }
 
-    cellSetObject (col, row, object) { this.grid.getCell(col, row).setObject(object); }
-    cellGetObject (col, row) { this.grid.getCell(col, row).getObject(); }
-    cellHasObject (col, row) { this.grid.getCell(col, row).hasObject(); }
-    adjacentCellHasObject (col, row) {
+    cellSetItem (col, row, object) { this.grid.getCell(col, row).item = object; }
+    cellGetItem (col, row) { this.grid.getCell(col, row).item; }
+    cellHasItem (col, row) { this.grid.getCell(col, row).hasItem; }
+    adjacentCellHasItem (col, row) {
         let cell = this.grid.getCell(col, row);
 
-        return (cell.cellUp() && cell.cellUp().hasObject())
-            || (cell.cellRight() && cell.cellRight().hasObject())
-            || (cell.cellDown() && cell.cellDown().hasObject())
-            || (cell.cellLeft() && cell.cellLeft().hasObject());
+        return (cell.cellUp && cell.cellUp.hasItem)
+            || (cell.cellRight && cell.cellRight.hasItem)
+            || (cell.cellDown && cell.cellDown.hasItem)
+            || (cell.cellLeft && cell.cellLeft.hasItem);
     }
 
     draw () {
@@ -93,7 +93,7 @@ class Maze extends Phaser.SpriteBatch {
 
                 let walls = [];
                 // since we build from top-left to bottom-right, no need to create extra north walls as we created a south wall in the cell above us
-                if (cell.getNorth() && !cell.cellUp()) {
+                if (cell.wallNorth && !cell.cellUp) {
                     walls.push({
                         x: left + this.cell_size / 2,
                         y: top + this.line_size / 2,
@@ -103,7 +103,7 @@ class Maze extends Phaser.SpriteBatch {
                 }
 
 
-                if (cell.getEast()) {
+                if (cell.wallEast) {
                     walls.push({
                         x: left + this.cell_size - this.line_size / 2,
                         y: top + this.cell_size / 2,
@@ -112,7 +112,7 @@ class Maze extends Phaser.SpriteBatch {
                     });
                 }
 
-                if (cell.getSouth()) {
+                if (cell.wallSouth) {
                     walls.push({
                         x: left + this.cell_size / 2,
                         y: top + this.cell_size - this.line_size / 2,
@@ -122,7 +122,7 @@ class Maze extends Phaser.SpriteBatch {
                 }
 
                 // since we build from top-left to bottom-right, no need to create extra west walls as we created a east wall in the cell to the left of us
-                if (cell.getWest() && !cell.cellLeft()) {
+                if (cell.wallWest && !cell.cellLeft) {
                     walls.push({
                         x: left + this.line_size / 2,
                         y: top + this.cell_size / 2,
