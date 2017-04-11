@@ -1,25 +1,17 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.Wall = (function () {
-    "use strict";
-
-    var fn = function (game, x, y, texture, name, debug) {
-        Phaser.Sprite.call(this, game, x, y, texture);
+class Wall extends Phaser.Sprite {
+    constructor (game, x, y, texture, name = "wall", debug = false) {
+        super(game, x, y, texture);
 
         // physics
         this.game.physics.p2.enable(this);
 
-        this.debug       = debug || false;
+        this.debug       = debug;
         this.anchor.x    = 0.5;
         this.anchor.y    = 0.5;
-        this.name        = name || "wall";
+        this.name        = name;
         this.body.static = true;
         this.body.debug  = this.debug;
-    };
-
-    fn.prototype = Object.create(Phaser.Sprite.prototype);
-    fn.prototype.constructor = fn;
-
-    return fn;
-})();
+    }
+}

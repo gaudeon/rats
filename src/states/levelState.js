@@ -5,18 +5,18 @@ class LevelState extends Phaser.State {
         super(game);
     }
 
-    init (level_number, base_maze_size, base_num_cheese, statistics) {
+    init (level_number = 1, base_maze_size = 10, base_num_cheese = 5, statistics = {}) {
         // game stats
-        this.statistics            = statistics || {};
+        this.statistics            = statistics;
         this.statistics.level_seed = this.statistics.level_seed || Date.now();
         this.statistics.levels     = this.statistics.levels || {};
 
         // current level
-        this.level_number    = level_number || 1;
+        this.level_number    = level_number;
         this.rng             = new Phaser.RandomDataGenerator([this.statistics.level_seed]);
-        this.base_maze_size  = base_maze_size || 10;
+        this.base_maze_size  = base_maze_size;
         this.maze_size       = this.base_maze_size + (this.level_number > 1 ? 2 : 0);
-        this.base_num_cheese = base_num_cheese || 5;
+        this.base_num_cheese = base_num_cheese;
         this.num_cheese      = this.base_num_cheese + (this.level_number > 1 ? 1 : 0);
         this.time_remaining  = 15; // in seconds
         this.time_elapsed    = 0;
@@ -37,7 +37,7 @@ class LevelState extends Phaser.State {
         this.game.stage.backgroundColor = "#6f6f6f";
 
         // create the maze
-        this.maze = new App.Maze(this.game, this.padding, this.padding, this.maze_size, this.maze_size, "BinaryTree", this.level_seed, this.debug);
+        this.maze = new Maze(this.game, this.padding, this.padding, this.maze_size, this.maze_size, "BinaryTree", this.level_seed, this.debug);
 
         // calculate x axis bounds
         let bounds_x = this.maze.pixelWidth() + this.padding;
@@ -53,7 +53,7 @@ class LevelState extends Phaser.State {
         // add the rat
         let rat_cell_col = this.rng.between(0, this.maze_size - 1);
         let rat_cell_row = this.rng.between(0, this.maze_size - 1);
-        this.rat = new App.Rat(this.game, this.maze.cellCenterX(rat_cell_col), this.maze.cellCenterY(rat_cell_row), this.debug);
+        this.rat = new Rat(this.game, this.maze.cellCenterX(rat_cell_col), this.maze.cellCenterY(rat_cell_row), this.debug);
         this.game.add.existing(this.rat);
         this.maze.cellSetObject(rat_cell_col, rat_cell_row, this.rat);
 
@@ -97,7 +97,7 @@ class LevelState extends Phaser.State {
             this.cheese_sound = this.game.add.audio("cheeseSound", 1, false);
             this.bomb_sound = this.game.add.audio("bombSound", 1, false);
 
-            let cheese = new App.Cheese(this.game, this.maze.cellCenterX(cheese_cell_col), this.maze.cellCenterY(cheese_cell_row), cheese_type, this.debug);
+            let cheese = new Cheese(this.game, this.maze.cellCenterX(cheese_cell_col), this.maze.cellCenterY(cheese_cell_row), cheese_type, this.debug);
             cheese.events.onKilled.add((cheese) => {
                 // play sound
                 this.cheese_sound.play();
@@ -114,7 +114,7 @@ class LevelState extends Phaser.State {
         }
 
         // setup the hud
-        this.hud = new App.Hud(this.game, this, this.debug);
+        this.hud = new Hud(this.game, this, this.debug);
 
         // start the timers
         this.startTimers();

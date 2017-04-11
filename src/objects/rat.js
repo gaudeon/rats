@@ -1,14 +1,11 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.Rat = (function () {
-    "use strict";
-
-    var fn = function (game, x, y, debug) {
-        Phaser.Sprite.call(this, game, x, y, 'spriteAtlas', 'rat');
+class Rat extends Phaser.Sprite {
+    constructor (game, x, y, debug = false) {
+        super(game, x, y, 'spriteAtlas', 'rat');
 
         // debugging
-        this.debug = debug || false;
+        this.debug = debug;
 
         // the rat image is large so we are just going to scale it here
         this.width = 27;
@@ -21,14 +18,14 @@ App.Rat = (function () {
         this.cheese_collected = 0;
 
         // speed related data
-        this.normal_speed = 150;
+        this.normal_speed   = 150;
         this.enhanced_speed = 300;
-        this.speed = this.normal_speed;
+        this.speed          = this.normal_speed;
 
-        var rng    = new Phaser.RandomDataGenerator([Date.now()]);
-        var color_r = rng.between(0x9f, 0xff);
-        var color_g = rng.between(0x9f, 0xff);
-        var color_b = rng.between(0x9f, 0xff);
+        let rng     = new Phaser.RandomDataGenerator([Date.now()]),
+            color_r = rng.between(0x9f, 0xff),
+            color_g = rng.between(0x9f, 0xff),
+            color_b = rng.between(0x9f, 0xff);
         this.normal_color = (color_r << 16) | (color_g << 8) | color_b;
         this.tint = this.normal_color;
 
@@ -39,11 +36,12 @@ App.Rat = (function () {
 
         // physics
         this.game.physics.p2.enable(this);
-        this.body.angularDamping = 1;
+
+        this.body.angularDamping     = 1;
         this.body.collideWorldBounds = true;
 
         // helps reduce breaking through walls
-        this.body.onBeginContact.add((function (body) {
+        this.body.onBeginContact.add((body) => {
             if (body) {
                 if (body.sprite.name.match(/wall/)) {
                     this.body.setZeroVelocity();
@@ -52,14 +50,14 @@ App.Rat = (function () {
                     body.sprite.kill();
                 }
             }
-        }).bind(this));
+        });
 
         // helps reduce breaking through walls
-        this.body.onEndContact.add((function (body) {
+        this.body.onEndContact.add((body) => {
             if (body && body.sprite && body.sprite.name && body.sprite.name.match(/wall/)) {
                 this.body.setZeroVelocity();
             }
-        }).bind(this));
+        });
 
         this.controls = this.game.input.keyboard.createCursorKeys();
 
@@ -69,11 +67,8 @@ App.Rat = (function () {
         this.body.debug = this.debug;
     };
 
-    fn.prototype = Object.create(Phaser.Sprite.prototype);
-    fn.prototype.constructor = fn;
-
-    fn.prototype.update = function () {
-        var moving = false;
+    update () {
+        let moving = false;
 
         if (this.controls.left.isDown) {
             this.body.moveLeft(this.speed);
@@ -117,7 +112,5 @@ App.Rat = (function () {
         else {
             this.tint = this.normal_color;
         }
-    };
-
-    return fn;
-})();
+    }
+}

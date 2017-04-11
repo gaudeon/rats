@@ -1,4 +1,3 @@
-- Integrate ES6 features into current code
 - Flesh out build process so it is more automated
 - Implement Unit Testing
 - Change initial time to be 5 seconds per cheese in the current level

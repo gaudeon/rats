@@ -17,7 +17,7 @@ class ResultsState extends Phaser.State {
     }
 
     create () {
-        this.results_display   = new App.ResultsDisplay(this.game, this, this.debug)
+        this.results_display   = new ResultsDisplay(this.game, this, this.debug)
         this.results_display.y = this.game.height;
         this.results_display.visible = true;
 

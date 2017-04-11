@@ -1,21 +1,16 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.Algorithm = (function () {
-    "use strict";
-
-    var fn = function (game, width, height, grid, seed) {
+class Algorithm {
+    constructor (game, width, height, grid, seed = Date.now()) {
         this.game   = game;
         this.width  = width;
         this.height = height;
         this.grid   = grid;
-        this.seed   = seed || Date.now();
+        this.seed   = seed;
         this.rng    = new Phaser.RandomDataGenerator([seed]);
-    };
+    }
 
-    fn.prototype.run = function (grid) {
+    run (grid) {
         // overwrite me
-    };
-
-    return fn;
-})();
+    }
+}

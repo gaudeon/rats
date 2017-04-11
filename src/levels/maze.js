@@ -1,26 +1,23 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.Maze = (function () {
-    "use strict";
+class Maze extends Phaser.SpriteBatch {
+    constructor (game, grid_x = 0, grid_y = 0, grid_width = 10, grid_height = 10, algorithm = "Solid", seed = Date.now(), debug = false) {
+        super(game);
 
-    var fn = function (game, grid_x, grid_y, grid_width, grid_height, algorithm, seed, debug) {
-        Phaser.SpriteBatch.call(this, game);
-
-        this.grid_width      = grid_width || 10;
-        this.grid_height     = grid_height || 10;
-        this.grid_x          = grid_x || 0;
-        this.grid_y          = grid_y || 0;
+        this.grid_width      = grid_width;
+        this.grid_height     = grid_height;
+        this.grid_x          = grid_x;
+        this.grid_y          = grid_y;
         this.line_size       = 4;
         this.cell_size       = 100;
-        this.grid            = new App.Grid(game, this.grid_width, this.grid_height);
-        this.debug           = debug || false;
-        this.seed            = seed  || Date.now();
-        this.algorithm       = algorithm || "Solid";
-        this.algorithm_class = eval("App." + this.algorithm + "Algorithm");
+        this.grid            = new Grid(game, this.grid_width, this.grid_height);
+        this.debug           = debug;
+        this.seed            = seed;
+        this.algorithm       = algorithm;
+        this.algorithm_class = eval(`${algorithm}Algorithm`);
         if ("undefined" === typeof this.algorithm_class) {
             this.algorithm       = "Solid";
-            this.algorithm_class = App.SolidAlgorithm;
+            this.algorithm_class = SolidAlgorithm;
         }
 
         // this.h_wall_color = (x + y * this.width) % 2 == 0 ? 0xffffff : 0xff0000; // debug, alternate cell colors
@@ -47,60 +44,57 @@ App.Maze = (function () {
         this.physicsBodyType = Phaser.Physics.P2JS;
 
         this.draw();
-    };
+    }
 
-    fn.prototype = Object.create(Phaser.SpriteBatch.prototype);
-    fn.prototype.constructor = fn;
-
-    fn.prototype.pixelWidth = function () {
+    pixelWidth () {
         return this.grid_width * this.cell_size + this.grid_width * this.line_size + this.line_size;
-    };
+    }
 
-    fn.prototype.pixelHeight = function () {
+    pixelHeight () {
         return this.grid_height * this.cell_size + this.grid_height * this.line_size + this.line_size;
-    };
+    }
 
     // find a pixel value in the center of a cell by it's column or roll
-    fn.prototype.cellCenterValue = function (i) {
+    cellCenterValue (i) {
         return i * this.cell_size + this.cell_size / 2 - i * this.line_size;
-    };
+    }
 
-    fn.prototype.cellTopLeftX = function (cell_col) { return this.grid_x + this.cell_size * cell_col - this.line_size * cell_col; };
-    fn.prototype.cellTopLeftY = function (cell_row) { return this.grid_y + this.cell_size * cell_row - this.line_size * cell_row; };
+    cellTopLeftX (cell_col) { return this.grid_x + this.cell_size * cell_col - this.line_size * cell_col; }
+    cellTopLeftY (cell_row) { return this.grid_y + this.cell_size * cell_row - this.line_size * cell_row; }
 
-    fn.prototype.cellCenterX = function (cell_col) { return this.cellTopLeftX(cell_col) + this.cell_size / 2; };
-    fn.prototype.cellCenterY = function (cell_row) { return this.cellTopLeftY(cell_row) + this.cell_size / 2; };
+    cellCenterX (cell_col) { return this.cellTopLeftX(cell_col) + this.cell_size / 2; }
+    cellCenterY (cell_row) { return this.cellTopLeftY(cell_row) + this.cell_size / 2; }
 
-    fn.prototype.cellSetObject = function (col, row, object) { this.grid.getCell(col, row).setObject(object); };
-    fn.prototype.cellGetObject = function (col, row) { this.grid.getCell(col, row).getObject(); };
-    fn.prototype.cellHasObject = function (col, row) { this.grid.getCell(col, row).hasObject(); };
-    fn.prototype.adjacentCellHasObject = function (col, row) {
-        var cell = this.grid.getCell(col, row);
+    cellSetObject (col, row, object) { this.grid.getCell(col, row).setObject(object); }
+    cellGetObject (col, row) { this.grid.getCell(col, row).getObject(); }
+    cellHasObject (col, row) { this.grid.getCell(col, row).hasObject(); }
+    adjacentCellHasObject (col, row) {
+        let cell = this.grid.getCell(col, row);
 
         return (cell.cellUp() && cell.cellUp().hasObject())
             || (cell.cellRight() && cell.cellRight().hasObject())
             || (cell.cellDown() && cell.cellDown().hasObject())
             || (cell.cellLeft() && cell.cellLeft().hasObject());
-    };
+    }
 
-    fn.prototype.draw = function () {
-        for (var x = 0; x < this.grid_width; x++) {
-            for (var y = 0; y < this.grid_height; y++) {
-                var cell = this.grid.getCell(x, y);
+    draw () {
+        for (let x = 0; x < this.grid_width; x++) {
+            for (let y = 0; y < this.grid_height; y++) {
+                let cell = this.grid.getCell(x, y);
 
                 //  x pos equals starting x plus number of columns over minus number of columns of walls since cell walls overlap
-                var left = this.cellTopLeftX(x);
+                let left = this.cellTopLeftX(x);
 
                 //  y pos equals starting y plus number of rows down minus number of rows of walls since cell walls overlap
-                var top  = this.cellTopLeftY(y);
+                let top  = this.cellTopLeftY(y);
 
-                var wall_x, wall_y;
-                var fnName = function (prefix) { return prefix + "_wall_" + x + "_" + y; };
+                let wall_x, wall_y;
+                let fnName = function (prefix) { return `${prefix}_wall_${x}_${y}`; };
 
-                var walls = [];
+                let walls = [];
                 // since we build from top-left to bottom-right, no need to create extra north walls as we created a south wall in the cell above us
                 if (cell.getNorth() && !cell.cellUp()) {
-                    walls.push( {
+                    walls.push({
                         x: left + this.cell_size / 2,
                         y: top + this.line_size / 2,
                         texture: this.h_wall_texture,
@@ -110,7 +104,7 @@ App.Maze = (function () {
 
 
                 if (cell.getEast()) {
-                    walls.push( {
+                    walls.push({
                         x: left + this.cell_size - this.line_size / 2,
                         y: top + this.cell_size / 2,
                         texture: this.v_wall_texture,
@@ -119,7 +113,7 @@ App.Maze = (function () {
                 }
 
                 if (cell.getSouth()) {
-                    walls.push( {
+                    walls.push({
                         x: left + this.cell_size / 2,
                         y: top + this.cell_size - this.line_size / 2,
                         texture: this.h_wall_texture,
@@ -137,12 +131,10 @@ App.Maze = (function () {
                     });
                 }
 
-                walls.forEach((function (wall) {
-                    this.add(new App.Wall(this.game, wall.x, wall.y, wall.texture, wall.name, this.debug));
-                }).bind(this));
+                walls.forEach((wall) => {
+                    this.add(new Wall(this.game, wall.x, wall.y, wall.texture, wall.name, this.debug));
+                });
             }
         }
-    };
-
-    return fn;
-})();
+    }
+}

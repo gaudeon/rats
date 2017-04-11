@@ -1,27 +1,25 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.Grid = (function () {
-    "use strict";
-
-    var fn = function (game, width, height) {
+class Grid {
+    constructor (game, width = 10, height = 10) {
         this.game   = game;
-        this.width  = width || 10;
-        this.height = height || 10;
+        this.width  = width;
+        this.height = height;
         this.size   = this.width * this.height;
 
         this.grid = [];
 
-        for (var i = 0; i < this.size; i++) {
-            var x = i % this.width;
-            var y = Math.floor(i / this.width);
-            this.grid[i] = new App.Cell(game, x, y, i);
+        for (let i = 0; i < this.size; i++) {
+            let x = i % this.width,
+                y = Math.floor(i / this.width);
+
+            this.grid[i] = new Cell(game, x, y, i);
         }
 
-        for (var i = 0; i < this.size; i++) {
-            var x    = i % this.width;
-            var y    = Math.floor(i / this.width);
-            var cell = this.getCell(x, y);
+        for (let i = 0; i < this.size; i++) {
+            let x    = i % this.width,
+                y    = Math.floor(i / this.width),
+                cell = this.getCell(x, y);
 
             if (x < this.width - 1) {
                 cell.setCellRight( this.getCell(x + 1, y) );
@@ -39,13 +37,11 @@ App.Grid = (function () {
                 cell.setCellUp( this.getCell(x, y - 1) );
             }
         }
-    };
+    }
 
-    fn.prototype.getCell = function (x, y) {
-        var index = y * this.width + x;
+    getCell (x, y) {
+        let index = y * this.width + x;
 
         return this.grid[index];
-    };
-
-    return fn;
-})();
+    }
+}

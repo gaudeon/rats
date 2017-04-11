@@ -1,19 +1,11 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.SolidAlgorithm = (function () {
-    "use strict";
+class SolidAlgorithm extends Algorithm {
+    constructor (game, width, height, grid, seed) {
+        super(game, width, height, grid, seed);
+    }
 
-    var fn = function (game, width, height, grid, seed) {
-        App.Algorithm.call(this, game, width, height, grid, seed);
-    };
-
-    fn.prototype = Object.create(App.Algorithm.prototype);
-    fn.prototype.constructor = fn;
-
-    fn.prototype.run = function () {
+    run () {
         // do nothing :)
-    };
-
-    return fn;
-})();
+    }
+}

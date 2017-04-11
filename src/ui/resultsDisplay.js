@@ -1,14 +1,11 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.ResultsDisplay = (function () {
-    "use strict";
-
-    var fn = function (game, state, debug) {
-        Phaser.Group.call(this, game);
+class ResultsDisplay extends Phaser.Group {
+    constructor (game, state, debug = false) {
+        super(game);
 
         this.state = state;
-        this.debug = debug || false;
+        this.debug = debug;
 
         // background panel
         this.bg_color = 0x3f3f3f;
@@ -34,7 +31,7 @@ App.ResultsDisplay = (function () {
         this.bg = this.create(0, 0, this.bg_texture);
 
         // game over title
-        var title_top = 10;
+        let title_top = 10;
         this.title = new Phaser.Text(this.game, 0, title_top, "Ahh Rats! Game Over", {
             "font": "48px Chewy",
             "fontSize": 48,
@@ -54,7 +51,7 @@ App.ResultsDisplay = (function () {
         this.bg = this.create(0, this.game.height - 100, this.bg_texture);
 
         // countdown
-        this.countdown = new App.CountDown(this.game, this.game.width - 70, this.game.height - 66, "#efefef", this.state, this.debug);
+        this.countdown = new CountDown(this.game, this.game.width - 70, this.game.height - 66, "#efefef", this.state, this.debug);
         this.add(this.countdown);
 
         // prompt text
@@ -69,12 +66,9 @@ App.ResultsDisplay = (function () {
         this.controls.enter = this.game.input.keyboard.addKey(Phaser.KeyCode.ENTER);
 
         this.visible = false; // start as hidden and let states that use us make us visible when they want
-    };
+    }
 
-    fn.prototype = Object.create(Phaser.Group.prototype);
-    fn.prototype.constructor = fn;
-
-    fn.prototype.update = function () {
+    update () {
         if (this.controls.up.isDown && this.stats.y < this.stats_top) {
             this.stats.y += 10;
         }
@@ -88,10 +82,10 @@ App.ResultsDisplay = (function () {
 
         // since we overwrote update we need to call our own childrens' update functions now
         this.countdown.update();
-    };
+    }
 
-    fn.prototype.arrow = function () {
-        var arrow = new Phaser.Sprite(this.game, 0, 0, "spriteAtlas", "arrow");
+    arrow () {
+        let arrow = new Phaser.Sprite(this.game, 0, 0, "spriteAtlas", "arrow");
         arrow.width = 35;
         arrow.height = 30;
         arrow.tint = 0xff6666;
@@ -99,42 +93,47 @@ App.ResultsDisplay = (function () {
         arrow.anchor.y = 0.5;
 
         return arrow;
-    };
+    }
 
-    fn.prototype.statistics = function () {
-        var stats = new Phaser.Group(this.game, this);
+    statistics () {
+        let stats = new Phaser.Group(this.game, this);
 
-        for (var level_number in this.state.statistics.levels) {
-            var level = this.state.statistics.levels[level_number];
-            var top   = (level_number - 1) * 58;
+        for (let level_number in this.state.statistics.levels) {
+            let level = this.state.statistics.levels[level_number],
+                top   = (level_number - 1) * 58;
 
-            var level_number_text = new Phaser.Text(this.game, 0, top, level_number + ". ", {
+            let level_number_text = new Phaser.Text(this.game, 0, top, `${level_number}.`, {
                 "font": "48px Chewy",
                 "fontSize": 48,
                 "fill": "#ff6666"
             });
             stats.add(level_number_text);
 
-            var cheese_icon = stats.create(100, top + 18, "spriteAtlas", "cheese");
+            let cheese_icon = stats.create(100, top + 18, "spriteAtlas", "cheese");
             cheese_icon.width = 32;
             cheese_icon.height = 21;
 
-            var cheese_text = new Phaser.Text(this.game, 150, top + 12, (level.cheese_collected || 0) + ' / ' + (level.num_cheese || 0), {
+            let cheese_collected = level.cheese_collected || 0,
+                cheese_total     = level.num_cheese || 0;
+
+            let cheese_text = new Phaser.Text(this.game, 150, top + 12, `${cheese_collected} / ${cheese_total}`, {
                 "font": "32px Chewy",
                 "fontSize": 32,
                 "fill": "#ff6666"
             });
             stats.add(cheese_text);
 
-            var watch_icon = stats.create(300, top + 16, "spriteAtlas", "stopwatch");
+            let watch_icon = stats.create(300, top + 16, "spriteAtlas", "stopwatch");
             watch_icon.width = 24;
             watch_icon.height = 24;
 
-            var elapsed = level.time_elapsed || 0;
-            var elapsed_minutes = Math.floor(elapsed / 60);
-            var elapsed_seconds = elapsed - elapsed_minutes * 60;
+            let elapsed = level.time_elapsed || 0,
+                elapsed_minutes = Math.floor(elapsed / 60),
+                elapsed_seconds = elapsed - elapsed_minutes * 60;
 
-            var elapsed_text = new Phaser.Text(this.game, 345, top + 12, elapsed_minutes + ":" + (elapsed_seconds < 10 ? "0" + elapsed_seconds : elapsed_seconds), {
+            elapsed_seconds = (elapsed_seconds < 10) ? "0" + elapsed_seconds : elapsed_seconds;
+
+            let elapsed_text = new Phaser.Text(this.game, 345, top + 12, `${elapsed_minutes}:${elapsed_seconds}`, {
                 "font": "32px Chewy",
                 "fontSize": 32,
                 "fill": "#ff6666"
@@ -143,7 +142,5 @@ App.ResultsDisplay = (function () {
         }
 
         return stats;
-    };
-
-    return fn;
-})();
+    }
+}

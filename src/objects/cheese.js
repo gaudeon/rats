@@ -1,17 +1,16 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.Cheese = (function () {
-    "use strict";
+class Cheese extends Phaser.Sprite {
+    constructor (game, x, y, type, debug = false) {
+        let cheese_type = (type && type.match(/^(speed|bomb)$/)) ? type : undefined,
+            key         = cheese_type ? `cheese_${cheese_type}` : 'cheese';
 
-    var fn = function (game, x, y, type, debug) {
-        this.cheese_type = (type && type.match(/^(speed|bomb)$/)) ? type : undefined;
-        var key = this.cheese_type ? 'cheese_' + this.cheese_type : 'cheese';
+        super(game, x, y, 'spriteAtlas', key);
 
-        Phaser.Sprite.call(this, game, x, y, 'spriteAtlas', key);
+        this.cheese_type = cheese_type;
 
         // debugging
-        this.debug = debug || false;
+        this.debug = debug;
 
         // the rat image is large so we are just going to scale it here
         this.width = 48;
@@ -28,27 +27,22 @@ App.Cheese = (function () {
 
         // debugging
         this.body.debug = this.debug;
-    };
+    }
 
-    fn.prototype = Object.create(Phaser.Sprite.prototype);
-    fn.prototype.constructor = fn;
-
-    fn.prototype.applyEffect = function (state) {
-            switch (this.cheese_type) {
-                case "speed":
-                    state.rat.speed = state.rat.enhanced_speed;
-                    state.cheese_speed_enabled = true;
-                    state.cheese_speed_time_remaining += 7;
-                    break;
-                case "bomb":
-                    state.startCheeseBomb();
-                    break;
-                default:
-                    state.time_remaining += 10;
-                    state.cleanupOneCheeseBomb();
-                    break;
-            };
-    };
-
-    return fn;
-})();
+    applyEffect (state) {
+        switch (this.cheese_type) {
+            case "speed":
+                state.rat.speed = state.rat.enhanced_speed;
+                state.cheese_speed_enabled = true;
+                state.cheese_speed_time_remaining += 7;
+                break;
+            case "bomb":
+                state.startCheeseBomb();
+                break;
+            default:
+                state.time_remaining += 10;
+                state.cleanupOneCheeseBomb();
+                break;
+        };
+    }
+}

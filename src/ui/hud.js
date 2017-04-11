@@ -1,14 +1,11 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.Hud = (function () {
-    "use strict";
-
-    var fn = function (game, state, debug) {
-        Phaser.Group.call(this, game);
+class Hud extends Phaser.Group {
+    constructor (game, state, debug = false) {
+        super(game);
 
         this.state = state;
-        this.debug = debug || false;
+        this.debug = debug;
         this.fixedToCamera = true;
 
         this.bar_height = 50;
@@ -26,17 +23,12 @@ App.Hud = (function () {
         this.cheese_icon.width = 32;
         this.cheese_icon.height = 21;
 
-        this.cheese_counter = this.add(new App.CheeseCounter(this.game, 72, this.game.height - this.bar_height + 8, this.state, this.debug));
+        this.cheese_counter = this.add(new CheeseCounter(this.game, 72, this.game.height - this.bar_height + 8, this.state, this.debug));
 
         this.watch_icon = this.create(this.game.width - 120, this.game.height - this.bar_height + 16, "spriteAtlas", "stopwatch");
         this.watch_icon.width = 24;
         this.watch_icon.height = 24;
 
-        this.countdown = this.add(new App.CountDown(this.game, this.game.width - 70, this.game.height - this.bar_height + 8, "#ff6666", this.state, this.debug));
-    };
-
-    fn.prototype = Object.create(Phaser.Group.prototype);
-    fn.prototype.constructor = fn;
-
-    return fn;
-})();
+        this.countdown = this.add(new CountDown(this.game, this.game.width - 70, this.game.height - this.bar_height + 8, "#ff6666", this.state, this.debug));
+    }
+}

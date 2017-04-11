@@ -1,17 +1,11 @@
-// namespace
-var App = App || {};
+"use strict";
 
-App.BinaryTreeAlgorithm = (function () {
-    "use strict";
+class BinaryTreeAlgorithm extends Algorithm {
+    constructor (game, width, height, grid, seed) {
+        super(game, width, height, grid, seed);
+    }
 
-    var fn = function (game, width, height, grid, seed) {
-        App.Algorithm.call(this, game, width, height, grid, seed);
-    };
-
-    fn.prototype = Object.create(App.Algorithm.prototype);
-    fn.prototype.constructor = fn;
-
-    fn.prototype.run = function () {
+    run () {
         for (var x = 0; x < this.width; x++) {
             for (var y = 0; y < this.height; y++) {
                 var cell = this.grid.getCell(x,y);
@@ -34,7 +28,5 @@ App.BinaryTreeAlgorithm = (function () {
                 }
             }
         }
-    };
-
-    return fn;
-})();
+    }
+}
