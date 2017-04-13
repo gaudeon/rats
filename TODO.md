@@ -1,4 +1,3 @@
-- Flesh out build process so it is more automated
 - Implement Unit Testing
 - Change initial time to be 5 seconds per cheese in the current level
 - Fix collision problems - combine collision rects for the walls
