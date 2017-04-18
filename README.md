@@ -16,6 +16,11 @@ Ever want to be a rat in a maze searching for cheese? Well this is your lucky da
 > electron .
 ```
 
+## Unit Testing
+```
+> npm test
+```
+
 ## Building
 ```
 > gulp

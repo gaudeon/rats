@@ -9,3 +9,8 @@ class SolidAlgorithm extends Algorithm {
         // do nothing :)
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = SolidAlgorithm;
+}

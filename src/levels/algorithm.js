@@ -14,3 +14,8 @@ class Algorithm {
         // overwrite me
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = Algorithm;
+}

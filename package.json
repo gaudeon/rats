@@ -10,9 +10,14 @@
   },
   "author": "Dash Bang Splat (Travis Chase aka gaudeon)",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
   "dependencies": {},
   "devDependencies": {
     "body-parser": "^1.15.2",
+    "canvas-mock": "0.0.0",
+    "chai": "^3.5.0",
     "debug": "^2.2.0",
     "electron": "^1.6.2",
     "express": "^4.14.0",
@@ -26,6 +31,9 @@
     "gulp-run-command": "0.0.7",
     "gulp-uglify": "^2.0.1",
     "gulp-zip": "^4.0.0",
+    "jsdom": "^9.12.0",
+    "mocha": "^3.2.0",
+    "p2": "^0.7.1",
     "path": "^0.12.7",
     "phaser-ce": "^2.7.3",
     "pump": "^1.0.2",

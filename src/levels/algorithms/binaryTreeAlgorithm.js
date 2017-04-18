@@ -30,3 +30,8 @@ class BinaryTreeAlgorithm extends Algorithm {
         }
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = BinaryTreeAlgorithm;
+}
