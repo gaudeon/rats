@@ -15,10 +15,19 @@ global.Maze = require('../../../src/levels/maze');
 
 
 describe("Maze", function () {
+    var maze;
+
+    describe("constructor()", function () {
+        it("generates an maze object", function () {
+            maze = new Maze(game);
+
+            assert.isObject(maze);
+        });
+
+    });
+
     describe("draw()", function () {
         it("is a function", function () {
-            var maze = new Maze(game);
-
             assert.isFunction(maze.draw);
         });
     });

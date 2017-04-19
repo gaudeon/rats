@@ -9,9 +9,17 @@ before(function() {
 global.Algorithm = require('../../../../src/levels/algorithm');
 global.SolidAlgorithm = require('../../../../src/levels/algorithms/solidAlgorithm');
 
-let solid_algorithm = new SolidAlgorithm();
-
 describe("SolidAlgorithm", function () {
+    var solid_algorithm;
+
+    describe("constructor()", function () {
+        it("generates an object", function () {
+            solid_algorithm = new SolidAlgorithm();
+
+            assert.isObject(solid_algorithm);
+        });
+    });
+
     describe("run()", function () {
         it("is a function", function () {
             assert.isFunction(solid_algorithm.run);

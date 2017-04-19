@@ -8,9 +8,17 @@ before(function() {
 // reqs
 global.Cell = require('../../../src/levels/cell');
 
-let cell = new Cell();
-
 describe("Cell", function () {
+    var cell;
+
+    describe("constructor()", function () {
+        it("generates an object", function () {
+            cell = new Cell();
+
+            assert.isObject(cell);
+        });
+    });
+
     describe("cellRight", function () {
         it("starts null", function () {
             assert.isNull(cell.cellRight);
