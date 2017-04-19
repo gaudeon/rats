@@ -1,6 +1,9 @@
-var env = require('../../env');
+var env    = require('../../env'),
+    assert = require('chai').assert;
 
-var assert = require('chai').assert;
+before(function() {
+    return env.game_ready;
+});
 
 // reqs
 global.Algorithm = require('../../../src/levels/algorithm');

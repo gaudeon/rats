@@ -1,13 +1,9 @@
-var env = require('../../env');
+var env    = require('../../env'),
+    assert = require('chai').assert;
 
 before(function() {
-    //console.log(Phaser.Device);
-    //console.log(game);
-    this.timeout(60000);
     return env.game_ready;
 });
-
-var assert = require('chai').assert;
 
 // reqs
 global.Algorithm = require('../../../src/levels/algorithm');
