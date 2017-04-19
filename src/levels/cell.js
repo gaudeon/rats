@@ -74,3 +74,8 @@ class Cell {
     get item    () { return this._item; }
     get hasItem () { return "undefined" !== typeof this._item; }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = Cell;
+}

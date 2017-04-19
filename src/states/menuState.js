@@ -46,3 +46,8 @@ class MenuState extends Phaser.State {
         }
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = MenuState;
+}

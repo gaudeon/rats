@@ -22,3 +22,8 @@ class CountDown extends Phaser.Text {
         this.text = `${minutes}:${seconds}`;
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = CountDown;
+}

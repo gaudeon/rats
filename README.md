@@ -10,6 +10,7 @@ Ever want to be a rat in a maze searching for cheese? Well this is your lucky da
 2. Electron.io - httpd://electron.atom.io - used to for development and pacaking (i.e. `npm install -g electron`)
 3. Electron Packager - build binaries for various platforms and architectures (i.e. `npm install -g electron-packager`)
 4. Install all the dev deps in the rats dir for things like gulp and phaser-ce (i.e. `npm install`)
+5. Note: node-canvas is one of the npm dev deps, cairo is a Pre-requisite for node-canvas (see https://www.npmjs.com/package/canvas for more details)
 
 ## Starting (from the rats directory)
 ```

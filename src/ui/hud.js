@@ -32,3 +32,8 @@ class Hud extends Phaser.Group {
         this.countdown = this.add(new CountDown(this.game, this.game.width - 70, this.game.height - this.bar_height + 8, "#ff6666", this.state, this.debug));
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = Hud;
+}

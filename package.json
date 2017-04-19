@@ -16,7 +16,7 @@
   "dependencies": {},
   "devDependencies": {
     "body-parser": "^1.15.2",
-    "canvas-mock": "0.0.0",
+    "canvas": "^1.6.5",
     "chai": "^3.5.0",
     "debug": "^2.2.0",
     "electron": "^1.6.2",

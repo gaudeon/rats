@@ -218,3 +218,8 @@ class LevelState extends Phaser.State {
         this.state.start('Level', true, false, this.level_number + 1, this.maze_size, this.num_cheese, this.statistics);
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = LevelState;
+}

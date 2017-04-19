@@ -18,3 +18,8 @@ class LoadingState extends Phaser.State {
         }
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = LoadingState;
+}

@@ -49,3 +49,8 @@ class ResultsState extends Phaser.State {
         this.state.start('Menu', true, false);
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = ResultsState;
+}

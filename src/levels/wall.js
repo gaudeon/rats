@@ -15,3 +15,8 @@ class Wall extends Phaser.Sprite {
         this.body.debug  = this.debug;
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = Wall;
+}

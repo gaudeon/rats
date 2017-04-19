@@ -138,3 +138,8 @@ class Maze extends Phaser.SpriteBatch {
         }
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = Maze;
+}

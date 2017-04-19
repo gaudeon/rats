@@ -46,3 +46,8 @@ class Cheese extends Phaser.Sprite {
         };
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = Cheese;
+}

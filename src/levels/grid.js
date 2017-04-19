@@ -45,3 +45,8 @@ class Grid {
         return this.grid[index];
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = Grid;
+}

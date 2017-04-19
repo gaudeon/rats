@@ -144,3 +144,8 @@ class ResultsDisplay extends Phaser.Group {
         return stats;
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = ResultsDisplay;
+}

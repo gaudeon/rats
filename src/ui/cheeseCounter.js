@@ -19,3 +19,8 @@ class CheeseCounter extends Phaser.Text {
         this.text = `${collected} / ${total}`;
     }
 }
+
+// running under node
+if (typeof module !== 'undefined') {
+    module.exports = CheeseCounter;
+}

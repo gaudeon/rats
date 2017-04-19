@@ -1,4 +1,4 @@
-require('../../../env');
+var env = require('../../../env');
 
 var assert = require('chai').assert;
 
