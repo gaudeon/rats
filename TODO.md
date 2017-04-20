@@ -1,5 +1,4 @@
-- Implement Unit Testing
-- Change initial time to be 5 seconds per cheese in the current level
+- Change initial time to be 5 seconds per cheese in the current level (done)
 - Fix collision problems - combine collision rects for the walls
 - Improve rat controls
 - Add a how to play screen

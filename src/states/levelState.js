@@ -12,16 +12,17 @@ class LevelState extends Phaser.State {
         this.statistics.levels     = this.statistics.levels || {};
 
         // current level
-        this.level_number    = level_number;
-        this.rng             = new Phaser.RandomDataGenerator([this.statistics.level_seed]);
-        this.base_maze_size  = base_maze_size;
-        this.maze_size       = this.base_maze_size + (this.level_number > 1 ? 2 : 0);
-        this.base_num_cheese = base_num_cheese;
-        this.num_cheese      = this.base_num_cheese + (this.level_number > 1 ? 1 : 0);
-        this.time_remaining  = 15; // in seconds
-        this.time_elapsed    = 0;
-        this.padding         = 100;
-        this.debug           = false;
+        this.level_number       = level_number;
+        this.rng                = new Phaser.RandomDataGenerator([this.statistics.level_seed]);
+        this.base_maze_size     = base_maze_size;
+        this.maze_size          = this.base_maze_size + (this.level_number > 1 ? 2 : 0);
+        this.base_num_cheese    = base_num_cheese;
+        this.num_cheese         = this.base_num_cheese + (this.level_number > 1 ? 1 : 0);
+        this.seconds_per_cheese = 5;
+        this.time_remaining     = this.num_cheese * this.seconds_per_cheese; // in seconds
+        this.time_elapsed       = 0;
+        this.padding            = 100;
+        this.debug              = false;
 
         //speed cheese
         this.cheese_speed_time_remaining = 0;
